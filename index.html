@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike vs Car - Go Green!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bike vs Car - Go Green!</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Roboto', sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                background: linear-gradient(45deg, #4285f4, #0f9d58, #f4b400, #db4437);
+                background-size: 400% 400%;
+                animation: gradient 15s ease infinite;
+                color: #202124;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            @keyframes gradient {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+            .container {
+                max-width: 800px;
+                width: 90%;
+                background-color: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(10px);
+                padding: 24px;
+                border-radius: 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            h1 {
+                color: #ffffff;
+                text-align: center;
+                font-weight: 400;
+                font-size: 32px;
+                margin-bottom: 24px;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            #map {
+                height: 400px;
+                width: 100%;
+                margin-bottom: 24px;
+                border-radius: 12px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            .bike-box {
+                background-color: rgba(232, 240, 254, 0.6);
+                border-left: 4px solid #1a73e8;
+                border-radius: 8px;
+                padding: 16px;
+                margin-bottom: 24px;
+                font-size: 18px;
+                color: #1a73e8;
+                display: flex;
+                align-items: center;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(5px);
+            }
+            .bike-box:hover {
+                background-color: rgba(210, 227, 252, 0.8);
+                transform: translateY(-2px);
+            }
+            .bike-emoji {
+                font-size: 28px;
+                margin-right: 12px;
+                animation: bike-ride 2s infinite linear;
+            }
+            @keyframes bike-ride {
+                0% { transform: translateX(0) rotate(0deg); }
+                50% { transform: translateX(10px) rotate(5deg); }
+                100% { transform: translateX(0) rotate(0deg); }
+            }
+            .form-group {
+                margin-bottom: 16px;
+            }
+            label {
+                display: block;
+                margin-bottom: 8px;
+                color: #ffffff;
+                font-weight: 500;
+            }
+            input[type="text"] {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 8px;
+                font-size: 16px;
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+                transition: all 0.3s ease;
+            }
+            input[type="text"]::placeholder {
+                color: rgba(255, 255, 255, 0.6);
+            }
+            input[type="text"]:focus {
+                outline: none;
+                border-color: #1a73e8;
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+            button {
+                background-color: #1a73e8;
+                color: white;
+                padding: 12px 24px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 500;
+                text-transform: uppercase;
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            button:hover {
+                background-color: #1765cc;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            #result {
+                margin-top: 24px;
+                padding: 16px;
+                background-color: rgba(248, 249, 250, 0.6);
+                border-radius: 8px;
+                border-left: 4px solid #34a853;
+                backdrop-filter: blur(5px);
+            }
+            .eco-fact {
+                background-color: rgba(230, 244, 234, 0.6);
+                border-left: 4px solid #34a853;
+                border-radius: 8px;
+                padding: 16px;
+                margin-top: 24px;
+                font-size: 14px;
+                color: #137333;
+                backdrop-filter: blur(5px);
+            }
+        </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚲 Bike vs Car Challenge 🚗</h1>
+        <div class="bike-box">
+            <span class="bike-emoji">🚴</span>
+            <span>Pedal power! Consider biking this route</span>
+        </div>
+        <div id="map"></div>
+        <form id="routeForm">
+            <div class="form-group">
+                <label for="origin">Starting point:</label>
+                <input type="text" id="origin" name="origin" required placeholder="Enter your starting location">
+            </div>
+            <div class="form-group">
+                <label for="destination">Where to?</label>
+                <input type="text" id="destination" name="destination" required placeholder="Enter your destination">
+            </div>
+            <button type="submit">Let's Go!</button>
+        </form>
+        <div id="result"></div>
+        <div class="eco-fact">
+            Did you know? Cycling just 10km each way to work would save 1500kg of greenhouse gas emissions each year!
+        </div>
+    </div>
+
+
+    <script>
+        let map;
+        let directionsService;
+        let directionsRenderer;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 37.7749, lng: -122.4194 }, // Default to San Francisco
+                zoom: 12
+            });
+
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+
+            const autocompleteOrigin = new google.maps.places.Autocomplete(document.getElementById('origin'));
+            const autocompleteDestination = new google.maps.places.Autocomplete(document.getElementById('destination'));
+
+            document.getElementById('routeForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                calculateRoute();
+            });
+        }
+
+        function calculateRoute() {
+            const origin = document.getElementById('origin').value;
+            const destination = document.getElementById('destination').value;
+
+            if (origin && destination) {
+                const request = {
+                    origin: origin,
+                    destination: destination,
+                    travelMode: 'BICYCLING',
+                };
+
+                directionsService.route(request, function(result, status) {
+                    if (status === 'OK') {
+                        directionsRenderer.setDirections(result);
+                        const bikingTime = result.routes[0].legs[0].duration.text;
+                        const bikingDistance = result.routes[0].legs[0].distance.text;
+
+                        // Perform calculations on the backend
+                        fetch('/calculate', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}`
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Error in response from backend');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            document.getElementById('result').innerHTML = `
+                                <h3>Results:</h3>
+                                <div class="bike-box">
+                                    🚲 Consider biking this route
+                                </div>
+
+                                <p>Biking Time: ${bikingTime}</p>
+                                <p>Driving Time: ${data.drivingTime}</p>
+                                <p>Emissions: ${data.emissions.toFixed(2)} kg CO₂</p>
+                                <p>Calories Burned: ${data.caloriesBurned.toFixed(0)} calories</p>
+                            `;
+                        })
+                        .catch(err => console.error(err));
+                    } else {
+                        console.error('Directions request failed due to ' + status);
+                    }
+                });
+            }
+        }
+
+        // Load Google Maps API script
+        (function loadGoogleMapsAPI() {
+            const script = document.createElement('script');
+            script.src = '/google-maps-api'; // This will be a new route on your server
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+
+</body>
+</html>
